@@ -1,0 +1,29 @@
+body{
+    background-color: rgb(91, 180, 180);
+   
+}
+.Login{
+    margin: 250px 0 0 0 ;
+    display: flex;
+    justify-content: center;
+ 
+}
+.Login_banner{
+    display: flex;
+}
+
+.Login_text{
+    margin-top: 50px;
+  margin-right: 50px;
+    color: white;
+ 
+}
+@media screen and (max-width: 600px) { 
+    .Login_banner{
+        display: flex;
+        flex-direction: column;
+    }
+    .Login{
+        margin: 0 0 0 0 ;
+    }
+}
