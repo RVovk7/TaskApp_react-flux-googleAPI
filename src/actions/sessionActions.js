@@ -5,30 +5,23 @@ import api from '../api';
 const SessionActions = {
     authorize(immediate = false, callback) {
         api.authorize({ immediate   })
-            .then(() => {
+            .then(  () => {
                 appDisp.dispatch({
                     type: appConst.SESSION_AUTHORIZE_SUCCESS
                 });
-                
-               if (callback) {
-                callback();
-                console.log('run render')
-               } 
-            })
+
+                if (callback){
+                    callback();
+                }
+            } )
             .catch((err) => {
-                console.log('not sec')
                 appDisp.dispatch({
                     type: appConst.SESSION_AUTHORIZE_FAIL,
                     error: err
-                
                 });
-                
-                if (callback) {
-                    callback();
-                    console.log('second')
-                   } 
-              
+                if (callback) callback();
             });
+           
     }
 };
 
