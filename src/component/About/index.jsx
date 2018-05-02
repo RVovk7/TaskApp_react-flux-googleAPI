@@ -8,11 +8,11 @@ class About extends Component {
         return ( 
             <div className='AboutPage'>
 
-                <Paper zDepth={5}  className='AboutPage__content'>
+                <Paper zDepth={3}  className='AboutPage__content'>
                     <h2> Almost Google Tasks </h2>
                     <p>This application is written based on <a href='https://developers.google.com/google-apps/tasks/'>
                     Google Tasks API</a> using Material Design concepts.</p>
-                    <p>It is a final result of ReactJS Essential Course.</p>
+                    <p>It`s a demo task to improve my skils</p>
                 </Paper>
     
             </div>

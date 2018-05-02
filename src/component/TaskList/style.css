@@ -1,29 +1,30 @@
+
 .TasklistsPage {
     display: flex;
     height: 100%;
-    max-width: 1100px;
+   
     margin: 0 auto;
     position: relative;
 }
 
-.TasklistsPage__menu {
+.TasklistsPage_menu {
+    box-shadow: 3px 5px 10px;
     width: 300px;
     height: 100%;
     position: fixed;
-    background-color: transparent;
+    background-color: rgb(255, 255, 255);
 }
 
-.TasklistsPage__list {
+.TasklistsPage_list {
     background-color: transparent !important;
 }
 
-.TasklistsPage__title {
+.TasklistsPage_title {
     padding: 5px 10px;
     font-weight: 300;
 }
 
-.TasklistsPage__tasks {
-    background-color: #fff;
+.TasklistsPage_tasks {
     margin-left: 300px;
     width: 100%;
     height: 100vh;

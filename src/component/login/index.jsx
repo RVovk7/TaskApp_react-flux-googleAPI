@@ -14,6 +14,8 @@ class Login extends Component {
             isRedirecting: false
         }
     }
+    
+
     componentDidMount() {
         SessionStore.addChangeListener(this.onChange)
     }
@@ -21,10 +23,8 @@ class Login extends Component {
         SessionStore.removeChangeListener(this.onChange)
     }
     componentWillUpdate(nextProps, nextState) {
-        if (this.state.isLoginedIn) this.setState({ isRedirecting: true })
+        if (this.state.isLoginedIn) this.setState({ isRedirecting: true })  ///not needed
         console.log('willupdate', this.state.isRedirecting)
-
-
     }
 
     handleLogIn() {
@@ -58,8 +58,6 @@ class Login extends Component {
                                 </div>
 
                             </div>
-
-
                         )
                 )} />
                 {SessionStore.isLoggedIn() ?
@@ -68,7 +66,6 @@ class Login extends Component {
                 }
             </div>
         )
-
     }
     onChange = () => {
         this.setState({ isLoginedIn: SessionStore.isLoggedIn() });
