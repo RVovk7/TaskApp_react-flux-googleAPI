@@ -1,4 +1,6 @@
-import { EventEmitter} from 'events';
+import {
+    EventEmitter
+} from 'events';
 import appConst from '../constants/appConst';
 import appDisp from '../dispatcher/appDisp';
 
@@ -21,9 +23,9 @@ const SessionStore = Object.assign({}, EventEmitter.prototype, {
 appDisp.register(action => {
     console.info(action.type, action);
     switch (action.type) {
-      
 
-  case appConst.SESSION_AUTHORIZE_SUCCESS:
+
+        case appConst.SESSION_AUTHORIZE_SUCCESS:
             {
                 _isLoggedIn = true;
                 SessionStore.emitChange();
@@ -35,8 +37,9 @@ appDisp.register(action => {
                 SessionStore.emitChange();
                 break;
             }
-            default:  _isLoggedIn = false;
-             
+        default:
+            _isLoggedIn = false;
+
     }
 });
 export default SessionStore;

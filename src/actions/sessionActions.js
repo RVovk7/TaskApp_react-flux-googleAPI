@@ -1,4 +1,5 @@
 import appConst from '../constants/appConst';
+//import TaskListActions from './TaskListActions';
 import appDisp from '../dispatcher/appDisp';
 import api from '../api';
 
@@ -9,10 +10,12 @@ const SessionActions = {
                 appDisp.dispatch({
                     type: appConst.SESSION_AUTHORIZE_SUCCESS
                 });
-
-                if (callback){
-                    callback();
-                }
+                if (callback ){
+               /*      window.gapi.client.load('auth',()=>{
+                 
+               } ) */
+               callback();
+            }
             } )
             .catch((err) => {
                 appDisp.dispatch({
@@ -21,9 +24,6 @@ const SessionActions = {
                 });
                 if (callback) callback();
             });
-           
     }
 };
-
-
 export default SessionActions;

@@ -6,13 +6,19 @@ import SessionStore from './stores/sesionStore';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TaskList from './component/TaskList';
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      LoggedIn : SessionStore.isLoggedIn()
+      LoggedIn: SessionStore.isLoggedIn()
     }
   }
-  componentDidMount() {
+  logUp = () => {
+    this.setState({
+      LoggedIn: true
+    })
+  }
+  componentWillMount() {
+    console.log('mount')
     if (this.state.LoggedIn) {
       this.props.history.replace('/tasklist')
     }
@@ -21,21 +27,21 @@ class App extends Component {
     }
   }
   render() {
-      return (
-        <MuiThemeProvider>
-          <div>
-            {
-              this.state.LoggedIn ?
-                <Route path='/tasklist' component={TaskList} /> :
-                <Route path='/login' component={Login} />
-            }
-
-          </div>
-        </MuiThemeProvider>
-
-      )
-    }
+    return (
+      <MuiThemeProvider>
+        <div>
+          {
+            this.state.LoggedIn ?
+              <Route path='/tasklist' component={TaskList} /> :
+              <Route path='/login' render={() => (
+                <Login logUp={this.logUp} />
+              )} />
+          }
+        </div>
+      </MuiThemeProvider>
+    )
   }
+}
 
 export default withRouter(App);
 

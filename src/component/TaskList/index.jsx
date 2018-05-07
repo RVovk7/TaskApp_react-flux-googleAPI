@@ -3,9 +3,10 @@ import { List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import ListIcon from 'material-ui/svg-icons/action/view-list';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import FolderIcon from 'material-ui/svg-icons/file/folder';
+import AddIcon from 'material-ui/svg-icons/content/add';
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
-//eslint-disable-next-line
-import { Route, Redirect, Link, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import TaskListsStore from '../../stores/TaskListsStore';
 import TaskListActions from '../../actions/TaskListActions';
 import About from '../About';
@@ -26,15 +27,13 @@ class TaskList extends Component {
     componentWillUnmount() {
         TaskListsStore.removeChangeListener(this.onChange)
     }
-    aboutClick() {
-        console.log()
+    aboutClick = () => {
         this.props.history.push('/tasklist/about');
     }
-    /* homeClick(){
-        this.props.history.push('/tasklist');
-    } */
+    taskClick = list => {
+        this.props.history.push(`/tasklist/${list.id}`);
+    }
     render() {
-        console.log('TaskList_load')
         return (
             <div className='TasklistsPage' >
                 <div className='TasklistsPage_menu'>
@@ -45,15 +44,32 @@ class TaskList extends Component {
                             <ListItem
                                 leftIcon={<ActionHome />}
                                 primaryText="Home"
-                            //onClick={this.homeClick.bind(this)}
                             />
                             <ListItem
                                 leftIcon={<ListIcon />}
                                 primaryText="About"
-                                onClick={this.aboutClick.bind(this)}
+                                onClick={this.aboutClick}
                             />
                         </List>
                         <Divider />
+                        <List className='TasklistsPage__list' subheader="Task Lists">
+                            {
+                                this.state.taskList.length !== 0 ? this.state.taskList.map(list =>
+                                    <ListItem
+                                        key={list.id}
+                                        leftIcon={<FolderIcon />}
+                                        primaryText={list.name}
+                                    // onClick={this.props.history.push(`/tasklist/${list.id}`)}
+                                    />
+                                ) :
+                                    <div></div>
+                            }
+                        </List>
+                        <ListItem
+                            leftIcon={<AddIcon />}
+                            primaryText="Create new list"
+                            onClick={this.handleAddTaskList}
+                        />
                         <Divider />
                         <List className='TasklistsPage_list'>
                             <ListItem
@@ -67,7 +83,6 @@ class TaskList extends Component {
                 <div className='TasklistsPage_tasks'>
                     <Route exact path='/tasklist/about' component={About} />
                 </div>
-
             </div>
 
         );

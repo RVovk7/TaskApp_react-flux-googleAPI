@@ -21,7 +21,6 @@ export default {
 
         });
     },
-
 listTaskList(){
 const request = gapi.client.tasks.tasklists.list();
 return new Promise((reslove,reject) => {

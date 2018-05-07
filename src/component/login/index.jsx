@@ -4,18 +4,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import logo from '../../img/task.png';
 import SessionActions from '../../actions/sessionActions';
 import SessionStore from '../../stores/sesionStore';
-import TaskList from '../TaskList';
-import { Route, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoginedIn: SessionStore.isLoggedIn(),
-            isRedirecting: false
+            isLoginedIn: SessionStore.isLoggedIn()
         }
     }
-    
-
     componentDidMount() {
         SessionStore.addChangeListener(this.onChange)
     }
@@ -23,47 +19,39 @@ class Login extends Component {
         SessionStore.removeChangeListener(this.onChange)
     }
     componentWillUpdate(nextProps, nextState) {
-        if (this.state.isLoginedIn) this.setState({ isRedirecting: true })  ///not needed
-        console.log('willupdate', this.state.isRedirecting)
+        if (SessionStore.isLoggedIn()) {
+            const { logUp, history } = this.props;
+            logUp();
+            history.replace('/tasklist');
+        }
     }
-
     handleLogIn() {
         SessionActions.authorize();
-    }
 
+    }
     render() {
         return (
             <div>
-                <Route exact path="/login" render={() => (
-                    SessionStore.isLoggedIn() ? (
-                        <Redirect to='tasklist' />
-                    ) : (
-                            <div >
-                                <div className='Login'>
-                                    <div className='Login_banner'>
-                                        <div className='Login_text'>
-                                            <h1>Task</h1>
-                                            <p>Organise your life!</p>
-                                            <RaisedButton
-                                                className='login-button'
-                                                label='Log in with Google'
-                                                onClick={this.handleLogIn}
-                                            />
-                                        </div>
-                                        <img alt="sorry ("
-                                            src={logo}
-                                            className='LoginPage__image'
-                                        />
-                                    </div>
-                                </div>
-
+                <div >
+                    <div className='Login'>
+                        <div className='Login_banner'>
+                            <div className='Login_text'>
+                                <h1>Task</h1>
+                                <p>Organise your life!</p>
+                                <RaisedButton
+                                    className='login-button'
+                                    label='Log in with Google'
+                                    onClick={this.handleLogIn}
+                                />
                             </div>
-                        )
-                )} />
-                {SessionStore.isLoggedIn() ?
-                    <Route path='tasklist' component={TaskList} /> :
-                    <Route path='login' component={Login} />
-                }
+                            <img alt="logo fail"
+                                src={logo}
+                                className='LoginPage__image'
+                            />
+                        </div>
+                    </div>
+                </div>
+                )
             </div>
         )
     }
@@ -71,4 +59,4 @@ class Login extends Component {
         this.setState({ isLoginedIn: SessionStore.isLoggedIn() });
     }
 }
-export default Login;
+export default withRouter(Login);
