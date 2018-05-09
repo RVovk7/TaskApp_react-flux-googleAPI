@@ -18,7 +18,6 @@ class App extends Component {
     })
   }
   componentWillMount() {
-    console.log('mount')
     if (this.state.LoggedIn) {
       this.props.history.replace('/tasklist')
     }

@@ -6,16 +6,18 @@ import ActionHome from 'material-ui/svg-icons/action/home';
 import FolderIcon from 'material-ui/svg-icons/file/folder';
 import AddIcon from 'material-ui/svg-icons/content/add';
 import ExitIcon from 'material-ui/svg-icons/action/exit-to-app';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter} from 'react-router-dom';
 import TaskListsStore from '../../stores/TaskListsStore';
 import TaskListActions from '../../actions/TaskListActions';
 import About from '../About';
+import TaskPage from '../TaskPage';
 import './style.css';
 class TaskList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            taskList: TaskListsStore.getTaskLists()
+            taskList: TaskListsStore.getTaskLists(),
+            redirectTo : false
         };
     }
     componentWillMount() {
@@ -27,12 +29,7 @@ class TaskList extends Component {
     componentWillUnmount() {
         TaskListsStore.removeChangeListener(this.onChange)
     }
-    aboutClick = () => {
-        this.props.history.push('/tasklist/about');
-    }
-    taskClick = list => {
-        this.props.history.push(`/tasklist/${list.id}`);
-    }
+   
     render() {
         return (
             <div className='TasklistsPage' >
@@ -44,22 +41,23 @@ class TaskList extends Component {
                             <ListItem
                                 leftIcon={<ActionHome />}
                                 primaryText="Home"
+                                onClick={()=> this.props.history.replace('/tasklist')}
                             />
                             <ListItem
                                 leftIcon={<ListIcon />}
                                 primaryText="About"
-                                onClick={this.aboutClick}
+                                onClick={()=>  this.props.history.push('/tasklist/about')}
                             />
                         </List>
                         <Divider />
                         <List className='TasklistsPage__list' subheader="Task Lists">
                             {
-                                this.state.taskList.length !== 0 ? this.state.taskList.map(list =>
+                                this.state.taskList.length !== 0 ? this.state.taskList.map(list => 
                                     <ListItem
                                         key={list.id}
                                         leftIcon={<FolderIcon />}
                                         primaryText={list.name}
-                                    // onClick={this.props.history.push(`/tasklist/${list.id}`)}
+                                        onClick={()=>  this.props.history.push(`/tasklist/${list.id}`)}
                                     />
                                 ) :
                                     <div></div>
@@ -81,10 +79,16 @@ class TaskList extends Component {
                     </List>
                 </div >
                 <div className='TasklistsPage_tasks'>
+                {
+                    this.props.history.location.pathname === '/tasklist/about' ? 
                     <Route exact path='/tasklist/about' component={About} />
+                    :
+                    <Route exact  path='/tasklist/:id' component={TaskPage} />
+                }
+                   
+                   
                 </div>
             </div>
-
         );
     }
     onChange = () => {

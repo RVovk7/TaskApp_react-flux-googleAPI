@@ -3,9 +3,7 @@ import {
 } from 'events';
 import appConst from '../constants/appConst';
 import appDisp from '../dispatcher/appDisp';
-
 const CHANGE_EVENT = 'change';
-
 let _taskLists = [];
 //eslint-disable-next-line
 let _error = null;
@@ -17,7 +15,7 @@ function formatTaskList(data) {
     };
 }
 const TaskListsStore = Object.assign({}, EventEmitter.prototype, {
-    getTaskLists() {  
+    getTaskLists() {
         return _taskLists;
     },
     emitChange() {

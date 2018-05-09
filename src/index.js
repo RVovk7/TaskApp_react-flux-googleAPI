@@ -3,11 +3,8 @@ import React from 'react';
 import  {render} from 'react-dom';
 import App from './App';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-//import TaskListsActions from './actions/TaskListActions';
-//import api from './api';
 import SessionActions from './actions/sessionActions';
 gapi.load('auth',()=>{
-  console.log('gapi load');
   SessionActions.authorize(true,  renderApp);
 })
 let renderApp = () =>{
