@@ -7,6 +7,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    min-height: 500px;
+    margin: 15px;
 }
 
 .TasksPage__tasks {

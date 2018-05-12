@@ -27,7 +27,6 @@ class Login extends Component {
     }
     handleLogIn() {
         SessionActions.authorize();
-
     }
     render() {
         return (

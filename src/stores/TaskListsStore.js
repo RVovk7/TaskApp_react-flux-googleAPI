@@ -7,7 +7,6 @@ const CHANGE_EVENT = 'change';
 let _taskLists = [];
 //eslint-disable-next-line
 let _error = null;
-
 function formatTaskList(data) {
     return {
         id: data.id,
@@ -42,6 +41,20 @@ appDisp.register(function (action) {
             {
                 _taskLists = [];
                 _error = action.error;
+                TaskListsStore.emitChange();
+                break;
+            }
+            case appConst.TASK_LIST_CREATE_SUCCESS: {
+                const newTaskList = formatTaskList(action.taskList);
+                _taskLists.push(newTaskList);
+    
+                TaskListsStore.emitChange();
+                break;
+            }
+    
+            case appConst.TASK_LIST_CREATE_FAIL: {
+                _error = action.error;
+    
                 TaskListsStore.emitChange();
                 break;
             }

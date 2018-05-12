@@ -11,13 +11,17 @@ import TaskListsStore from '../../stores/TaskListsStore';
 import TaskListActions from '../../actions/TaskListActions';
 import About from '../About';
 import TaskPage from '../TaskPage';
+import TaskListCreateModal from '../TaskLIstCreateModal';
 import './style.css';
+///fix modal dilog window
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 class TaskList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             taskList: TaskListsStore.getTaskLists(),
-            redirectTo : false
+            isCreatingTaskList : false
         };
     }
     componentWillMount() {
@@ -29,7 +33,17 @@ class TaskList extends Component {
     componentWillUnmount() {
         TaskListsStore.removeChangeListener(this.onChange)
     }
-   
+    handleAddTaskList = ()=> {
+        this.setState({ isCreatingTaskList : true });
+    }
+    handleClose= ()=> {
+        this.setState({ isCreatingTaskList : false });
+    }
+    handleTaskListSubmit = taskList => {
+        TaskListActions.createTaskList(taskList);
+
+        this.setState({ isCreatingTaskList : false });
+    }
     render() {
         return (
             <div className='TasklistsPage' >
@@ -85,9 +99,12 @@ class TaskList extends Component {
                     :
                     <Route exact  path='/tasklist/:id' component={TaskPage} />
                 }
-                   
-                   
                 </div>
+                 <TaskListCreateModal
+                    isOpen={this.state.isCreatingTaskList}
+                    onSubmit={this.handleTaskListSubmit}
+                    onClose={this.handleClose}
+                /> 
             </div>
         );
     }

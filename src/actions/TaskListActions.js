@@ -16,7 +16,21 @@ const TaskListActions = {
                     items: err
                 })
             })
+    },
+    createTaskList(params) {
+        api.insertTaskList({ title: params.name })
+        .then(data => {
+            appDisp.dispatch({
+                type     : appConst.TASK_LIST_CREATE_SUCCESS,
+                taskList : data
+            });
+        })
+        .catch(err => {
+            appDisp.dispatch({
+                type  : appConst.TASK_LIST_CREATE_FAIL,
+                error : err
+            });
+        });
     }
-
-}
+};
 export default TaskListActions;
