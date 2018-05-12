@@ -10,7 +10,10 @@
     min-height: 500px;
     margin: 15px;
 }
-
+.addButton{
+    background-color: rgb(91, 180, 180);
+    border-radius: 15px;
+}
 .TasksPage__tasks {
     font-size: 1.7em;
     padding: 16px;

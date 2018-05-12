@@ -15,7 +15,6 @@ import TaskListCreateModal from '../TaskLIstCreateModal';
 import './style.css';
 ///fix modal dilog window
 import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 class TaskList extends Component {
     constructor(props) {
         super(props);
@@ -25,6 +24,7 @@ class TaskList extends Component {
         };
     }
     componentWillMount() {
+        injectTapEventPlugin();
         TaskListActions.loadTaskList();
     }
     componentDidMount() {

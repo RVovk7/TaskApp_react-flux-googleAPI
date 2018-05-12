@@ -2,49 +2,48 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
-import './style.css';
 
-class TaskListCreateModal extends Component {
+class TaskCreateModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: ''
+            text: ''
         }
     }
-
     handleClose = () => {
         const { onClose } = this.props;
 
-        this.setState({ name: '' });
+        this.setState({ text: '' });
 
         if (onClose) {
             onClose();
         }
     }
-
     handleSubmit = () => {
         const { onSubmit } = this.props;
+
         if (onSubmit) {
             onSubmit({
-                name: this.state.name
+                text: this.state.text
             });
         }
 
-        this.setState({ name: '' });
+        this.setState({ text: '' });
     }
     handleTextChange = e => {
         this.setState({
-            name: e.target.value
+            text: e.target.value
         });
     }
+  
 
     render() {
-        const { name } = this.state;
+        const { text } = this.state;
         const { isOpen } = this.props;
 
         return (
             <Dialog
-                className='TaskListCreateModal'
+                className='TaskCreateModal'
                 contentStyle={{ maxWidth: 400 }}
                 actions={[
                     <FlatButton
@@ -54,25 +53,24 @@ class TaskListCreateModal extends Component {
                     <FlatButton
                         primary
                         label='Submit'
-                        disabled={!name}
+                        disabled={!text}
                         onTouchTap={this.handleSubmit}
                     />
                 ]}
                 open={isOpen}
                 onRequestClose={this.handleClose}
             >
-                <h3 className='TaskListCreateModal__modal-title'>Add task list</h3>
+                <h3 className='TaskCreateModal__modal-title'>Add task</h3>
                 <TextField
                     fullWidth
                     ref={c => this.taskInput = c}
-                    value={name}
+                    value={text}
                     onChange={this.handleTextChange}
-                    hintText='e.g. movies to watch'
-                    floatingLabelText='Enter task list name'
+                    hintText='e.g. buy a bottle of milk'
+                    floatingLabelText='Enter task description'
                 />
             </Dialog>
         );
     }
 };
-
-export default TaskListCreateModal;
+export default TaskCreateModal;

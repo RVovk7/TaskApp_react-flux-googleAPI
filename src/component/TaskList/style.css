@@ -2,7 +2,6 @@
 .TasklistsPage {
     display: flex;
     height: 100%;
-   
     margin: 0 auto;
     position: relative;
 }
@@ -12,7 +11,7 @@
     width: 300px;
     height: 100%;
     position: fixed;
-    background-color: rgb(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .TasklistsPage_list {
@@ -26,6 +25,6 @@
 
 .TasklistsPage_tasks {
     margin-left: 300px;
-    width: 100%;
+    width: 79%;
     height: 100vh;
 }

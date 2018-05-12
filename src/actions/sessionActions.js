@@ -1,5 +1,4 @@
 import appConst from '../constants/appConst';
-//import TaskListActions from './TaskListActions';
 import appDisp from '../dispatcher/appDisp';
 import api from '../api';
 
@@ -11,9 +10,6 @@ const SessionActions = {
                     type: appConst.SESSION_AUTHORIZE_SUCCESS
                 });
                 if (callback ){
-               /*      window.gapi.client.load('auth',()=>{
-                 
-               } ) */
                callback();
             }
             } )
