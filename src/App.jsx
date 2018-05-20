@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Login from './component/Login';
 //eslint-disable-next-line
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import SessionStore from './stores/sesionStore';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TaskList from './component/TaskList';
+import Login from './component/Login';
+
 class App extends Component {
   constructor(props) {
     super(props)

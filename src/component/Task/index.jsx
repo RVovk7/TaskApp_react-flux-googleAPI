@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import './style.css';
-import ListItem from 'material-ui/List/ListItem';
+//import ListItem from 'material-ui/List/ListItem';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
+//import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 const ENTER_KEY = 13;
@@ -52,7 +51,6 @@ class Task extends Component {
 
     saveTask = () => {
         this.props.onUpdate({ text: this.input.value });
-
         this.setState({ isEditing: false });
     }
 

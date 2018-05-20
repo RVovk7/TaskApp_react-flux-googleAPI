@@ -12,7 +12,8 @@
 }
 .addButton{
     background-color: rgb(91, 180, 180);
-    border-radius: 15px;
+    color: white !important;
+    border-radius: 25px;
 }
 .TasksPage__tasks {
     font-size: 1.7em;
