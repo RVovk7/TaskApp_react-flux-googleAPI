@@ -46,7 +46,6 @@ class TaskPage extends Component {
     handleAddTask = () => {
         this.setState({ isCreatingTask: true });
     }
-
     handleClose = () => {
         this.setState({ isCreatingTask: false });
     }

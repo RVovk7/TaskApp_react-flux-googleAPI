@@ -18,7 +18,6 @@ const TasksActions = {
             });
         });
     },
-
     updateTaskStatus(params) {
         api.updateTask({
             taskListId: params.taskListId,
